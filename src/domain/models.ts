@@ -1,5 +1,4 @@
 export type MealSlot = "breakfast" | "lunch" | "dinner" | "snack";
-export type FoodStatus = "accepted" | "trying" | "retryLater";
 export type PrepDay = "Saturday" | "Sunday" | "Monday";
 export type Cuisine = "indian" | "mexican" | "japanese" | "chinese" | "american" | "mediterranean";
 
@@ -47,8 +46,6 @@ export type AppPreferences = {
   hasCompletedOnboarding: boolean;
   cuisine: Cuisine;
   prepDay: PrepDay;
-  favoriteMealIds: string[];
-  foodStatuses: Record<string, FoodStatus>;
   groceryCheckedIds: string[];
 };
 

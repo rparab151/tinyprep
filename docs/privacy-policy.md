@@ -10,7 +10,7 @@ TinyPrep does not require account signup and does not collect child names, birth
 
 ## Local Storage
 
-Meal preferences, favorites, food status labels, and grocery checklist state are stored locally on the user's device.
+Meal preferences and grocery checklist state are stored locally on the user's device.
 
 ## Ads, Subscriptions, and Analytics
 

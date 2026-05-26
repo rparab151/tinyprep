@@ -10,11 +10,11 @@ Quick toddler meal ideas
 
 ## Short Description
 
-Pick healthy 15-20 minute toddler meals by cuisine, save favorites, and build a grocery list offline.
+Pick healthy 15-20 minute toddler meals by cuisine and build a grocery list offline.
 
 ## Full Description
 
-TinyPrep is a free daily meal app for busy toddler parents. Choose a cuisine, get healthy toddler-friendly options that cook in 15-20 minutes, save favorite meals, track foods as accepted, trying, or retry later, and generate a grocery list.
+TinyPrep is a free daily meal app for busy toddler parents. Choose a cuisine, get healthy toddler-friendly options that cook in 15-20 minutes, see plain ingredients and recipe steps, and generate a grocery list.
 
 TinyPrep is designed to work without account signup and stores planning preferences locally on your device by default.
 

@@ -9,7 +9,7 @@ import type { ScreenProps, SharedScreenProps } from "./types";
 
 type Props = ScreenProps<"MealLibrary"> & SharedScreenProps;
 
-export function MealLibraryScreen({ navigation, cuisineLabel, meals, preferences }: Props) {
+export function MealLibraryScreen({ navigation, cuisineLabel, meals }: Props) {
   const [query, setQuery] = useState("");
 
   const filteredMeals = useMemo(() => {
@@ -44,8 +44,6 @@ export function MealLibraryScreen({ navigation, cuisineLabel, meals, preferences
         <Card key={meal.id}>
           <View style={styles.chips}>
             <Chip label={meal.slot} tone="blue" />
-            <Chip label={preferences.foodStatuses[meal.id] ?? "trying"} tone="green" />
-            {preferences.favoriteMealIds.includes(meal.id) ? <Chip label="favorite" tone="rose" /> : null}
           </View>
           <ListRow
             title={meal.name}
