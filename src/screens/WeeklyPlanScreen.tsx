@@ -10,40 +10,63 @@ import type { ScreenProps, SharedScreenProps } from "./types";
 type Props = ScreenProps<"WeeklyPlan"> & SharedScreenProps;
 
 export function WeeklyPlanScreen({ navigation, cuisineLabel, weeklyPlan, onShufflePlan }: Props) {
+  const today = weeklyPlan.days[0];
+  if (!today) {
+    return (
+      <ScrollView contentContainerStyle={styles.container}>
+        <Text style={styles.title}>Today's meals</Text>
+        <Card>
+          <ListRow title="No meals found" subtitle="Refresh to build a new set of quick options." />
+        </Card>
+        <Button label="Refresh" onPress={onShufflePlan} />
+      </ScrollView>
+    );
+  }
+
+  const todayMeals = Object.entries(today.meals);
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.header}>
         <View style={styles.headerCopy}>
-          <Text style={styles.kicker}>{cuisineLabel} toddler plan</Text>
-          <Text style={styles.title}>Weekly Plan</Text>
+          <Text style={styles.kicker}>{cuisineLabel} | 15-20 minute toddler meals</Text>
+          <Text style={styles.title}>Today's meals</Text>
         </View>
-        <Button label="Shuffle" onPress={onShufflePlan} variant="secondary" />
+        <Button label="Refresh" onPress={onShufflePlan} variant="secondary" />
       </View>
 
       <View style={styles.actions}>
         <Button label="Meals" onPress={() => navigation.navigate("MealLibrary")} variant="secondary" />
         <Button label="Groceries" onPress={() => navigation.navigate("GroceryList")} variant="secondary" />
-        <Button label="Prep Day" onPress={() => navigation.navigate("PrepDay")} variant="secondary" />
+        <Button label="Cook" onPress={() => navigation.navigate("PrepDay")} variant="secondary" />
         <Button label="Settings" onPress={() => navigation.navigate("SettingsPrivacy")} variant="secondary" />
       </View>
 
-      {weeklyPlan.days.map((day) => (
-        <Card key={day.day}>
-          <View style={styles.dayHeader}>
-            <Text style={styles.day}>{day.day}</Text>
-            <Chip label={cuisineLabel} tone="green" />
+      <Card>
+        <View style={styles.dayHeader}>
+          <View>
+            <Text style={styles.day}>Quick picks for today</Text>
+            <Text style={styles.daySubtext}>Four balanced options, all ready fast.</Text>
           </View>
-          {Object.entries(day.meals).map(([slot, meal]) => (
-            <ListRow
-              key={`${day.day}-${slot}`}
-              title={meal.name}
-              subtitle={`${slot} | ${meal.prepMinutes} min | ${meal.textureNote}`}
-              trailing="Open"
-              onPress={() => navigation.navigate("MealDetail", { mealId: meal.id })}
-            />
-          ))}
-        </Card>
-      ))}
+          <Chip label={cuisineLabel} tone="green" />
+        </View>
+        {todayMeals.map(([slot, meal]) => (
+          <ListRow
+            key={`${today.day}-${slot}`}
+            title={meal.name}
+            subtitle={`${slot} | ${meal.prepMinutes} min | ${meal.textureNote}`}
+            trailing="Open"
+            onPress={() => navigation.navigate("MealDetail", { mealId: meal.id })}
+          />
+        ))}
+      </Card>
+
+      <Card>
+        <Text style={styles.sectionTitle}>Daily rhythm</Text>
+        <ListRow title="Breakfast" subtitle="Soft start with a familiar texture and one fruit or yogurt side." />
+        <ListRow title="Lunch or dinner" subtitle="Use the same base ingredient twice to keep cooking simple." />
+        <ListRow title="Snack" subtitle="Offer a small protein, a soft carb, and water." />
+      </Card>
     </ScrollView>
   );
 }
@@ -85,5 +108,16 @@ const styles = StyleSheet.create({
     color: colors.ink,
     fontSize: 20,
     fontWeight: "900"
+  },
+  daySubtext: {
+    color: colors.muted,
+    fontSize: 14,
+    marginTop: 2
+  },
+  sectionTitle: {
+    color: colors.ink,
+    fontSize: 18,
+    fontWeight: "900",
+    marginBottom: spacing.sm
   }
 });

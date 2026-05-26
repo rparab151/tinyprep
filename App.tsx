@@ -61,7 +61,10 @@ export default function App() {
     [preferences.cuisine]
   );
   const weeklyPlan: MealPlan = useMemo(() => generateWeeklyPlan(selectedMeals, planSeed), [selectedMeals, planSeed]);
-  const groceryList = useMemo(() => buildGroceryList(weeklyPlan), [weeklyPlan]);
+  const groceryList = useMemo(
+    () => buildGroceryList({ days: weeklyPlan.days.slice(0, 1) }),
+    [weeklyPlan]
+  );
 
   function patchPreferences(patch: Partial<AppPreferences>) {
     setPreferences((current) => ({ ...current, ...patch }));
@@ -157,7 +160,7 @@ export default function App() {
             />
           )}
         </Stack.Screen>
-        <Stack.Screen name="WeeklyPlan" options={{ title: "Weekly Plan" }}>
+        <Stack.Screen name="WeeklyPlan" options={{ title: "Today" }}>
           {(props) => <WeeklyPlanScreen {...props} {...sharedProps} />}
         </Stack.Screen>
         <Stack.Screen name="MealLibrary" options={{ title: "Meal Library" }}>
@@ -169,7 +172,7 @@ export default function App() {
         <Stack.Screen name="GroceryList" options={{ title: "Grocery List" }}>
           {(props) => <GroceryListScreen {...props} {...sharedProps} />}
         </Stack.Screen>
-        <Stack.Screen name="PrepDay" options={{ title: "Prep Day" }}>
+        <Stack.Screen name="PrepDay" options={{ title: "Cook" }}>
           {(props) => <PrepDayScreen {...props} {...sharedProps} />}
         </Stack.Screen>
         <Stack.Screen name="SettingsPrivacy" options={{ title: "Settings & Privacy" }}>

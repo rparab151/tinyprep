@@ -33,7 +33,7 @@ export const cuisineOptions: { id: Cuisine; label: string; description: string }
   {
     id: "american",
     label: "American",
-    description: "Oats, muffins, turkey, sweet potatoes, yogurt, and freezer-friendly basics."
+    description: "Oats, muffins, turkey, sweet potatoes, yogurt, and quick comfort-food basics."
   },
   {
     id: "mediterranean",

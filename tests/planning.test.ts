@@ -45,3 +45,10 @@ test("generateWeeklyPlan changes rotation when seed changes", () => {
 
   assert.notEqual(firstDay.meals.breakfast.id, secondDay.meals.breakfast.id);
 });
+
+test("meal library only includes 15-20 minute options", () => {
+  for (const meal of mealLibrary) {
+    assert.ok(meal.prepMinutes >= 15, `${meal.name} is under 15 minutes`);
+    assert.ok(meal.prepMinutes <= 20, `${meal.name} is over 20 minutes`);
+  }
+});

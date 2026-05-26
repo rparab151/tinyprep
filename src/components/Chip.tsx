@@ -25,13 +25,13 @@ const styles = StyleSheet.create({
     backgroundColor: colors.surfaceWarm
   },
   green: {
-    backgroundColor: "#DFF1E5"
+    backgroundColor: "#DCFCE7"
   },
   blue: {
-    backgroundColor: "#DDEBF2"
+    backgroundColor: "#E0F2FE"
   },
   rose: {
-    backgroundColor: "#F7DDE5"
+    backgroundColor: "#FCE7F3"
   },
   label: {
     color: colors.ink,

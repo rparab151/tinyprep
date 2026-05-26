@@ -1,8 +1,8 @@
 # TinyPrep
 
-TinyPrep is a free, offline-first toddler meal-prep planner for busy parents. It helps plan a weekly toddler menu, organize prep-day batch cooking, track accepted/trying/retry-later foods, generate a deduplicated grocery list, save favorites, and keep reheating/freezer notes close.
+TinyPrep is a free, offline-first daily toddler meal app for busy parents. It helps pick healthy cuisine-based meal options that can be cooked in 15-20 minutes, track accepted/trying/retry-later foods, generate a grocery list, save favorites, and keep texture and leftover notes close.
 
-TinyPrep is for general meal-prep organization only. It is not medical advice.
+TinyPrep is for general meal organization only. It is not medical advice.
 
 ## Current App
 
@@ -12,10 +12,10 @@ Implemented:
 
 - TypeScript Expo app entrypoint
 - React Navigation native stack
-- Onboarding, Weekly Plan, Meal Library, Meal Detail, Grocery List, Prep Day, and Settings / Privacy screens
+- Onboarding, Today, Meal Library, Meal Detail, Grocery List, Cook, and Settings / Privacy screens
 - AsyncStorage persistence for local preferences, favorites, food status labels, grocery checklist state, and plan seed
 - Reusable cards, buttons, chips, list rows, and disclaimer banner
-- Testable meal-planning and grocery-list domain logic
+- Testable meal-selection and grocery-list domain logic
 - Store listing and privacy policy drafts in `docs/`
 - EAS build placeholder config
 
@@ -47,7 +47,7 @@ Then open the app with Expo Go or an Expo development build.
 npm test
 ```
 
-The current tests cover grocery-list ingredient deduping and weekly plan generation.
+The current tests cover grocery-list ingredient deduping, daily meal rotations, and 15-20 minute meal timing.
 
 ## EAS Build Notes
 

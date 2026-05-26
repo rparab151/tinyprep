@@ -12,15 +12,16 @@ export function GroceryListScreen({ navigation, groceryList, preferences, onTogg
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.nav}>
-        <Button label="Plan" onPress={() => navigation.navigate("WeeklyPlan")} variant="secondary" />
+        <Button label="Today" onPress={() => navigation.navigate("WeeklyPlan")} variant="secondary" />
         <Button label="Meals" onPress={() => navigation.navigate("MealLibrary")} variant="secondary" />
-        <Button label="Prep Day" onPress={() => navigation.navigate("PrepDay")} variant="secondary" />
+        <Button label="Cook" onPress={() => navigation.navigate("PrepDay")} variant="secondary" />
       </View>
-      <Text style={styles.title}>Deduped grocery list</Text>
-      <Text style={styles.subtitle}>Grouped by ingredient so repeat meals do not clutter your shop.</Text>
+      <Text style={styles.title}>Today's groceries</Text>
+      <Text style={styles.subtitle}>Grouped by ingredient from today's quick meal options.</Text>
 
       {groceryList.map((item) => {
         const checked = preferences.groceryCheckedIds.includes(item.id);
+        const mealLabel = item.mealCount === 1 ? "meal" : "meals";
         return (
           <Pressable key={item.id} onPress={() => onToggleGroceryItem(item.id)}>
             <Card>
@@ -30,7 +31,7 @@ export function GroceryListScreen({ navigation, groceryList, preferences, onTogg
                 </View>
                 <View style={styles.copy}>
                   <Text style={[styles.itemName, checked && styles.itemChecked]}>{item.name}</Text>
-                  <Text style={styles.meta}>Used in {item.mealCount} planned meals</Text>
+                  <Text style={styles.meta}>Used in {item.mealCount} {mealLabel} today</Text>
                   <Text style={styles.meals}>{item.mealNames.join(", ")}</Text>
                 </View>
                 <Chip label={item.category} tone="blue" />

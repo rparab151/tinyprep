@@ -22,11 +22,11 @@ export function OnboardingScreen({ navigation, selectedCuisine, onSelectCuisine,
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.kicker}>Free, offline toddler meal prep</Text>
-      <Text style={styles.title}>Prep once. Feed calmly all week.</Text>
+      <Text style={styles.kicker}>Healthy toddler meals in 15-20 minutes</Text>
+      <Text style={styles.title}>Pick a cuisine. Cook today.</Text>
       <Text style={styles.body}>
-        TinyPrep helps parents plan toddler meals by cuisine, prep freezer batches,
-        keep a grocery list, and remember what foods are accepted, trying, or worth retrying later.
+        TinyPrep gives parents quick toddler-friendly meal ideas by cuisine, a simple
+        grocery list, and an easy way to remember what foods are accepted, trying, or worth retrying later.
       </Text>
 
       <Text style={styles.sectionTitle}>Choose your meal style</Text>
@@ -45,7 +45,7 @@ export function OnboardingScreen({ navigation, selectedCuisine, onSelectCuisine,
       </View>
 
       <View style={styles.stack}>
-        {["No account signup", "No ads or subscriptions", "No analytics SDKs", "Local-only storage by default"].map((text) => (
+        {["No account signup", "Cuisine-first ideas", "15-20 minute meals", "Local-only storage by default"].map((text) => (
           <Card key={text}>
             <Text style={styles.cardText}>{text}</Text>
           </Card>
@@ -53,7 +53,7 @@ export function OnboardingScreen({ navigation, selectedCuisine, onSelectCuisine,
       </View>
 
       <DisclaimerBanner />
-      <Button label="Start planning" onPress={start} />
+      <Button label="Start today" onPress={start} />
     </ScrollView>
   );
 }

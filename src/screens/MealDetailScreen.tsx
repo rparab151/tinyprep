@@ -33,7 +33,7 @@ export function MealDetailScreen({ route, meals, preferences, onToggleFavorite, 
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>{meal.name}</Text>
-        <Text style={styles.subtitle}>{meal.batchYield} | {meal.prepMinutes} min</Text>
+        <Text style={styles.subtitle}>{meal.prepMinutes} min | {meal.batchYield}</Text>
       </View>
 
       <View style={styles.chips}>
@@ -62,10 +62,10 @@ export function MealDetailScreen({ route, meals, preferences, onToggleFavorite, 
 
       <Card>
         <Text style={styles.sectionTitle}>Notes</Text>
-        <ListRow title="Freezer" subtitle={meal.freezerNotes} />
-        <ListRow title="Reheat" subtitle={meal.reheatingNotes} />
+        <ListRow title="Cook" subtitle={meal.reheatingNotes} />
         <ListRow title="Texture" subtitle={meal.textureNote} />
         <ListRow title="Serving tip" subtitle={meal.servingTip} />
+        <ListRow title="Leftovers" subtitle={meal.freezerNotes} />
       </Card>
 
       <Card>

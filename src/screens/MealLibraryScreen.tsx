@@ -25,9 +25,9 @@ export function MealLibraryScreen({ navigation, cuisineLabel, meals, preferences
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.nav}>
-        <Button label="Plan" onPress={() => navigation.navigate("WeeklyPlan")} variant="secondary" />
+        <Button label="Today" onPress={() => navigation.navigate("WeeklyPlan")} variant="secondary" />
         <Button label="Groceries" onPress={() => navigation.navigate("GroceryList")} variant="secondary" />
-        <Button label="Prep Day" onPress={() => navigation.navigate("PrepDay")} variant="secondary" />
+        <Button label="Cook" onPress={() => navigation.navigate("PrepDay")} variant="secondary" />
       </View>
 
       <TextInput
@@ -38,7 +38,7 @@ export function MealLibraryScreen({ navigation, cuisineLabel, meals, preferences
         style={styles.input}
       />
 
-      <Text style={styles.kicker}>{cuisineLabel} toddler meals</Text>
+      <Text style={styles.kicker}>{cuisineLabel} 15-20 minute toddler meals</Text>
 
       {filteredMeals.map((meal) => (
         <Card key={meal.id}>
@@ -49,7 +49,7 @@ export function MealLibraryScreen({ navigation, cuisineLabel, meals, preferences
           </View>
           <ListRow
             title={meal.name}
-            subtitle={`${meal.batchYield} | ${meal.freezerNotes}`}
+            subtitle={`${meal.prepMinutes} min | ${meal.textureNote}`}
             trailing="Open"
             onPress={() => navigation.navigate("MealDetail", { mealId: meal.id })}
           />

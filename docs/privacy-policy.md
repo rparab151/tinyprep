@@ -2,7 +2,7 @@
 
 Last updated: Replace before submission.
 
-TinyPrep is designed as a free, offline-first toddler meal-prep planning app.
+TinyPrep is designed as a free, offline-first daily toddler meal app.
 
 ## Data Collection
 
@@ -10,7 +10,7 @@ TinyPrep does not require account signup and does not collect child names, birth
 
 ## Local Storage
 
-Meal planning preferences, favorites, food status labels, prep-day settings, and grocery checklist state are stored locally on the user's device.
+Meal preferences, favorites, food status labels, and grocery checklist state are stored locally on the user's device.
 
 ## Ads, Subscriptions, and Analytics
 
