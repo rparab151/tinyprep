@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "name": "TinyPrep",
+    "slug": "tinyprep",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#FFF8EF"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.rparab151.tinyprep",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "package": "com.rparab151.tinyprep",
+      "adaptiveIcon": {
+        "backgroundColor": "#FFF8EF"
+      }
+    },
+    "extra": {
+      "privacy": "offline-local-only",
+      "eas": {
+        "projectId": "replace-with-eas-project-id"
+      }
+    }
+  }
+}
