@@ -14,13 +14,37 @@ type Props = ScreenProps<"Onboarding"> & {
   onComplete: () => void;
 };
 
-export function OnboardingScreen({ navigation, selectedCuisine, onSelectCuisine, onComplete }: Props) {
-  const [step, setStep] = useState<"intro" | "cuisine">("intro");
+type OnboardingContentProps = {
+  selectedCuisine: Cuisine;
+  onSelectCuisine: (cuisine: Cuisine) => void;
+  onStart: () => void;
+};
 
-  function start() {
-    onComplete();
-    navigation.replace("WeeklyPlan");
-  }
+export function OnboardingScreen({ navigation, selectedCuisine, onSelectCuisine, onComplete }: Props) {
+  return (
+    <OnboardingContent
+      selectedCuisine={selectedCuisine}
+      onSelectCuisine={onSelectCuisine}
+      onStart={() => {
+        onComplete();
+        navigation.replace("WeeklyPlan");
+      }}
+    />
+  );
+}
+
+export function IntroScreen({ selectedCuisine, onSelectCuisine, onComplete }: Omit<Props, "navigation" | "route">) {
+  return (
+    <OnboardingContent
+      selectedCuisine={selectedCuisine}
+      onSelectCuisine={onSelectCuisine}
+      onStart={onComplete}
+    />
+  );
+}
+
+function OnboardingContent({ selectedCuisine, onSelectCuisine, onStart }: OnboardingContentProps) {
+  const [step, setStep] = useState<"intro" | "cuisine">("intro");
 
   if (step === "intro") {
     return (
@@ -30,12 +54,12 @@ export function OnboardingScreen({ navigation, selectedCuisine, onSelectCuisine,
           <Text style={styles.title}>Tonight's toddler meal, without the planning spiral.</Text>
           <Text style={styles.body}>
             Pick a cuisine and get fast, healthy toddler meals with ingredients, cooking steps,
-            groceries, and texture notes built for a 15-20 minute kitchen window.
+            and groceries built for a 15-20 minute kitchen window.
           </Text>
         </View>
 
         <View style={styles.featureGrid}>
-          {["Cuisine-led ideas", "15-20 minute cooking", "Ingredients + steps", "Toddler texture notes"].map((text) => (
+          {["Cuisine-led ideas", "15-20 minute cooking", "Ingredients + steps", "Grocery list"].map((text) => (
             <Card key={text}>
               <Text style={styles.cardText}>{text}</Text>
             </Card>
@@ -81,7 +105,7 @@ export function OnboardingScreen({ navigation, selectedCuisine, onSelectCuisine,
       </View>
 
       <DisclaimerBanner />
-      <Button label="Start today" onPress={start} />
+      <Button label="Start today" onPress={onStart} />
     </ScrollView>
   );
 }

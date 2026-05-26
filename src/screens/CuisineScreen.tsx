@@ -1,8 +1,8 @@
 import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { AppNav } from "../components/AppNav";
 import { Button } from "../components/Button";
 import { Card } from "../components/Card";
-import { Chip } from "../components/Chip";
 import { cuisineOptions } from "../data/cuisines";
 import { colors, spacing } from "../theme";
 import type { ScreenProps, SharedScreenProps } from "./types";
@@ -11,52 +11,50 @@ type Props = ScreenProps<"Cuisine"> & SharedScreenProps;
 
 export function CuisineScreen({ navigation, preferences, onSetCuisine }: Props) {
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.nav}>
-        <Button label="Today" onPress={() => navigation.navigate("WeeklyPlan")} variant="secondary" />
-        <Button label="Meals" onPress={() => navigation.navigate("MealLibrary")} variant="secondary" />
-        <Button label="Groceries" onPress={() => navigation.navigate("GroceryList")} variant="secondary" />
-      </View>
-
-      <View style={styles.header}>
+    <View style={styles.screen}>
+      <ScrollView contentContainerStyle={styles.container}>
+        <View style={styles.header}>
         <Text style={styles.kicker}>Meal style</Text>
         <Text style={styles.title}>Choose a cuisine</Text>
         <Text style={styles.subtitle}>Your daily meals, groceries, and cook list update around this choice.</Text>
-      </View>
+        </View>
 
-      {cuisineOptions.map((option) => {
-        const selected = preferences.cuisine === option.id;
-        return (
-          <Card key={option.id}>
-            <View style={styles.optionHeader}>
-              <View style={styles.optionCopy}>
-                <Text style={styles.optionTitle}>{option.label}</Text>
-                <Text style={styles.optionText}>{option.description}</Text>
+        {cuisineOptions.map((option) => {
+          const selected = preferences.cuisine === option.id;
+          return (
+            <Card key={option.id}>
+              <View style={styles.optionHeader}>
+                <View style={styles.optionCopy}>
+                  <Text style={styles.optionTitle}>{option.label}</Text>
+                  <Text style={styles.optionText}>{option.description}</Text>
+                </View>
               </View>
-              {selected ? <Chip label="Selected" tone="green" /> : null}
-            </View>
-            <Button
-              label={selected ? "Current cuisine" : `Use ${option.label}`}
-              variant={selected ? "secondary" : "primary"}
-              onPress={() => {
-                onSetCuisine(option.id);
-                navigation.navigate("WeeklyPlan");
-              }}
-            />
-          </Card>
-        );
-      })}
-    </ScrollView>
+              <Button
+                label={selected ? "Current cuisine" : `Use ${option.label}`}
+                variant={selected ? "secondary" : "primary"}
+                onPress={() => {
+                  onSetCuisine(option.id);
+                  navigation.navigate("WeeklyPlan");
+                }}
+              />
+            </Card>
+          );
+        })}
+      </ScrollView>
+      <AppNav active="Cuisine" navigation={navigation} />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+    backgroundColor: colors.background
+  },
   container: {
     padding: spacing.md,
-    gap: spacing.md
-  },
-  nav: {
-    gap: spacing.sm
+    gap: spacing.md,
+    paddingBottom: spacing.lg
   },
   header: {
     gap: spacing.xs

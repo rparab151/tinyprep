@@ -1,9 +1,11 @@
 import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { AppNav } from "../components/AppNav";
 import { Button } from "../components/Button";
 import { Card } from "../components/Card";
 import { ListRow } from "../components/ListRow";
 import type { Meal } from "../domain/models";
+import { ingredientLine, recipeStepsForMeal } from "../domain/recipes";
 import { colors, spacing } from "../theme";
 import type { ScreenProps, SharedScreenProps } from "./types";
 
@@ -14,28 +16,26 @@ export function PrepDayScreen({ navigation, cuisineLabel, meals }: Props) {
   const featuredMeals = quickMeals.slice(0, 6);
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.nav}>
-        <Button label="Today" onPress={() => navigation.navigate("WeeklyPlan")} variant="secondary" />
-        <Button label="Meals" onPress={() => navigation.navigate("MealLibrary")} variant="secondary" />
-        <Button label="Groceries" onPress={() => navigation.navigate("GroceryList")} variant="secondary" />
-      </View>
-      <Text style={styles.title}>Cook today</Text>
+    <View style={styles.screen}>
+      <ScrollView contentContainerStyle={styles.container}>
+        <Text style={styles.title}>Cook today</Text>
       <Text style={styles.subtitle}>Pick one {cuisineLabel} meal and cook from the ingredient list and steps below.</Text>
 
-      {featuredMeals.map((meal) => (
-        <CookCard
-          key={meal.id}
-          meal={meal}
-          onOpen={() => navigation.navigate("MealDetail", { mealId: meal.id })}
-        />
-      ))}
-    </ScrollView>
+        {featuredMeals.map((meal) => (
+          <CookCard
+            key={meal.id}
+            meal={meal}
+            onOpen={() => navigation.navigate("MealDetail", { mealId: meal.id })}
+          />
+        ))}
+      </ScrollView>
+      <AppNav active="PrepDay" navigation={navigation} />
+    </View>
   );
 }
 
 function CookCard({ meal, onOpen }: { meal: Meal; onOpen: () => void }) {
-  const steps = meal.recipeSteps ?? defaultRecipeSteps(meal);
+  const steps = recipeStepsForMeal(meal);
 
   return (
     <Card>
@@ -50,7 +50,7 @@ function CookCard({ meal, onOpen }: { meal: Meal; onOpen: () => void }) {
       <Text style={styles.sectionTitle}>Ingredients</Text>
       <View style={styles.ingredients}>
         {meal.ingredients.map((ingredient) => (
-          <Text key={ingredient.id} style={styles.ingredient}>- {ingredient.name}</Text>
+          <Text key={ingredient.id} style={styles.ingredient}>- {ingredientLine(ingredient)}</Text>
         ))}
       </View>
 
@@ -62,28 +62,15 @@ function CookCard({ meal, onOpen }: { meal: Meal; onOpen: () => void }) {
   );
 }
 
-function defaultRecipeSteps(meal: Meal): string[] {
-  if (meal.tags.includes("no-cook")) {
-    return [
-      `Prep ${meal.ingredients.slice(0, 3).map((item) => item.name.toLowerCase()).join(", ")}.`,
-      "Combine ingredients in a bowl or blender.",
-      "Stir or blend until the texture is smooth and even.",
-      "Chill briefly if the mixture needs time to soften."
-    ];
-  }
-
-  return [
-    `Prep ${meal.ingredients.slice(0, 3).map((item) => item.name.toLowerCase()).join(", ")}.`,
-    "Cook the main ingredients together until hot and soft.",
-    "Stir in remaining ingredients and loosen with water, milk, yogurt, or broth as needed.",
-    "Mash, shred, or cut into small pieces."
-  ];
-}
-
 const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+    backgroundColor: colors.background
+  },
   container: {
     padding: spacing.md,
-    gap: spacing.md
+    gap: spacing.md,
+    paddingBottom: spacing.lg
   },
   title: {
     color: colors.ink,
@@ -129,7 +116,4 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 20
   },
-  nav: {
-    gap: spacing.sm
-  }
 });

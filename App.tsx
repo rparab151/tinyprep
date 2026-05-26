@@ -14,7 +14,7 @@ import { CuisineScreen } from "./src/screens/CuisineScreen";
 import { GroceryListScreen } from "./src/screens/GroceryListScreen";
 import { MealDetailScreen } from "./src/screens/MealDetailScreen";
 import { MealLibraryScreen } from "./src/screens/MealLibraryScreen";
-import { OnboardingScreen } from "./src/screens/OnboardingScreen";
+import { IntroScreen, OnboardingScreen } from "./src/screens/OnboardingScreen";
 import { PrepDayScreen } from "./src/screens/PrepDayScreen";
 import { WeeklyPlanScreen } from "./src/screens/WeeklyPlanScreen";
 import { loadAppState, saveAppState } from "./src/storage/appStorage";
@@ -111,6 +111,7 @@ export default function App() {
       <Stack.Navigator
         initialRouteName={preferences.hasCompletedOnboarding ? "WeeklyPlan" : "Onboarding"}
         screenOptions={{
+          headerShown: false,
           headerStyle: { backgroundColor: colors.background },
           headerShadowVisible: false,
           headerTitleStyle: { color: colors.ink, fontWeight: "800" },
@@ -124,6 +125,18 @@ export default function App() {
               selectedCuisine={preferences.cuisine}
               onSelectCuisine={setCuisine}
               onComplete={() => patchPreferences({ hasCompletedOnboarding: true })}
+            />
+          )}
+        </Stack.Screen>
+        <Stack.Screen name="Intro" options={{ title: "TinyPrep" }}>
+          {(props) => (
+            <IntroScreen
+              selectedCuisine={preferences.cuisine}
+              onSelectCuisine={setCuisine}
+              onComplete={() => {
+                patchPreferences({ hasCompletedOnboarding: true });
+                props.navigation.navigate("WeeklyPlan");
+              }}
             />
           )}
         </Stack.Screen>

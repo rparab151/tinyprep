@@ -1,8 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
-import { Button } from "../components/Button";
+import { AppNav } from "../components/AppNav";
 import { Card } from "../components/Card";
-import { Chip } from "../components/Chip";
 import { ListRow } from "../components/ListRow";
 import { colors, spacing } from "../theme";
 import type { ScreenProps, SharedScreenProps } from "./types";
@@ -16,51 +15,50 @@ export function MealLibraryScreen({ navigation, cuisineLabel, meals }: Props) {
     const normalized = query.trim().toLowerCase();
     if (!normalized) return meals;
     return meals.filter((meal) =>
-      `${meal.name} ${meal.tags.join(" ")} ${meal.ingredients.map((x) => x.name).join(" ")}`
+      `${meal.name} ${meal.slot} ${meal.ingredients.map((x) => x.name).join(" ")}`
         .toLowerCase()
         .includes(normalized)
     );
   }, [meals, query]);
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.nav}>
-        <Button label="Today" onPress={() => navigation.navigate("WeeklyPlan")} variant="secondary" />
-        <Button label="Groceries" onPress={() => navigation.navigate("GroceryList")} variant="secondary" />
-        <Button label="Cook" onPress={() => navigation.navigate("PrepDay")} variant="secondary" />
-      </View>
-
-      <TextInput
+    <View style={styles.screen}>
+      <ScrollView contentContainerStyle={styles.container}>
+        <TextInput
         value={query}
         onChangeText={setQuery}
-        placeholder="Search meals, tags, ingredients"
+        placeholder="Search meals or ingredients"
         placeholderTextColor={colors.muted}
         style={styles.input}
-      />
+        />
 
-      <Text style={styles.kicker}>{cuisineLabel} 15-20 minute toddler meals</Text>
+        <Text style={styles.kicker}>{cuisineLabel} 15-20 minute toddler meals</Text>
 
-      {filteredMeals.map((meal) => (
-        <Card key={meal.id}>
-          <View style={styles.chips}>
-            <Chip label={meal.slot} tone="blue" />
-          </View>
-          <ListRow
-            title={meal.name}
-            subtitle={`${meal.prepMinutes} min | ${meal.textureNote}`}
-            trailing="Open"
-            onPress={() => navigation.navigate("MealDetail", { mealId: meal.id })}
-          />
-        </Card>
-      ))}
-    </ScrollView>
+        {filteredMeals.map((meal) => (
+          <Card key={meal.id}>
+            <ListRow
+              title={meal.name}
+              subtitle={`${meal.slot} | ${meal.prepMinutes} min`}
+              trailing="Open"
+              onPress={() => navigation.navigate("MealDetail", { mealId: meal.id })}
+            />
+          </Card>
+        ))}
+      </ScrollView>
+      <AppNav active="MealLibrary" navigation={navigation} />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+    backgroundColor: colors.background
+  },
   container: {
     padding: spacing.md,
-    gap: spacing.md
+    gap: spacing.md,
+    paddingBottom: spacing.lg
   },
   input: {
     minHeight: 48,
@@ -78,13 +76,4 @@ const styles = StyleSheet.create({
     fontWeight: "900",
     textTransform: "uppercase"
   },
-  chips: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: spacing.xs,
-    marginBottom: spacing.xs
-  },
-  nav: {
-    gap: spacing.sm
-  }
 });

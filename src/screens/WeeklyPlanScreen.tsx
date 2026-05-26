@@ -1,8 +1,8 @@
 import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { AppNav } from "../components/AppNav";
 import { Button } from "../components/Button";
 import { Card } from "../components/Card";
-import { Chip } from "../components/Chip";
 import { ListRow } from "../components/ListRow";
 import { colors, spacing } from "../theme";
 import type { ScreenProps, SharedScreenProps } from "./types";
@@ -26,48 +26,46 @@ export function WeeklyPlanScreen({ navigation, cuisineLabel, weeklyPlan, onShuff
   const todayMeals = Object.entries(today.meals);
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.header}>
+    <View style={styles.screen}>
+      <ScrollView contentContainerStyle={styles.container}>
+        <View style={styles.header}>
         <View style={styles.headerCopy}>
           <Text style={styles.kicker}>{cuisineLabel} | 15-20 minute toddler meals</Text>
           <Text style={styles.title}>What can I cook today?</Text>
         </View>
         <Button label="Refresh" onPress={onShufflePlan} variant="secondary" />
-      </View>
+        </View>
 
-      <View style={styles.actions}>
-        <Button label="Cuisine" onPress={() => navigation.navigate("Cuisine")} variant="secondary" style={styles.actionButton} />
-        <Button label="Meals" onPress={() => navigation.navigate("MealLibrary")} variant="secondary" style={styles.actionButton} />
-        <Button label="Groceries" onPress={() => navigation.navigate("GroceryList")} variant="secondary" style={styles.actionButton} />
-        <Button label="Cook" onPress={() => navigation.navigate("PrepDay")} variant="secondary" style={styles.actionButton} />
-      </View>
-
-      <Card>
-        <View style={styles.dayHeader}>
-          <View>
+        <Card>
+          <View style={styles.dayHeader}>
             <Text style={styles.day}>Quick picks for today</Text>
             <Text style={styles.daySubtext}>Four balanced options, all ready fast.</Text>
           </View>
-          <Chip label={cuisineLabel} tone="green" />
-        </View>
-        {todayMeals.map(([slot, meal]) => (
-          <ListRow
-            key={`${today.day}-${slot}`}
-            title={meal.name}
-            subtitle={`${slot} | ${meal.prepMinutes} min | ${meal.textureNote}`}
-            trailing="Open"
-            onPress={() => navigation.navigate("MealDetail", { mealId: meal.id })}
-          />
-        ))}
-      </Card>
-    </ScrollView>
+          {todayMeals.map(([slot, meal]) => (
+            <ListRow
+              key={`${today.day}-${slot}`}
+              title={meal.name}
+              subtitle={`${slot} | ${meal.prepMinutes} min | ${meal.textureNote}`}
+              trailing="Open"
+              onPress={() => navigation.navigate("MealDetail", { mealId: meal.id })}
+            />
+          ))}
+        </Card>
+      </ScrollView>
+      <AppNav active="WeeklyPlan" navigation={navigation} />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+    backgroundColor: colors.background
+  },
   container: {
     padding: spacing.md,
-    gap: spacing.md
+    gap: spacing.md,
+    paddingBottom: spacing.lg
   },
   header: {
     flexDirection: "row",
@@ -89,19 +87,7 @@ const styles = StyleSheet.create({
     fontWeight: "900",
     lineHeight: 39
   },
-  actions: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: spacing.sm
-  },
-  actionButton: {
-    flexBasis: "48%",
-    flexGrow: 1
-  },
   dayHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
     marginBottom: spacing.xs
   },
   day: {

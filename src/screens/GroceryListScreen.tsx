@@ -1,8 +1,7 @@
 import React from "react";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
-import { Button } from "../components/Button";
+import { AppNav } from "../components/AppNav";
 import { Card } from "../components/Card";
-import { Chip } from "../components/Chip";
 import { colors, spacing } from "../theme";
 import type { ScreenProps, SharedScreenProps } from "./types";
 
@@ -10,44 +9,46 @@ type Props = ScreenProps<"GroceryList"> & SharedScreenProps;
 
 export function GroceryListScreen({ navigation, groceryList, preferences, onToggleGroceryItem }: Props) {
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.nav}>
-        <Button label="Today" onPress={() => navigation.navigate("WeeklyPlan")} variant="secondary" />
-        <Button label="Meals" onPress={() => navigation.navigate("MealLibrary")} variant="secondary" />
-        <Button label="Cook" onPress={() => navigation.navigate("PrepDay")} variant="secondary" />
-      </View>
-      <Text style={styles.title}>Today's groceries</Text>
+    <View style={styles.screen}>
+      <ScrollView contentContainerStyle={styles.container}>
+        <Text style={styles.title}>Today's groceries</Text>
       <Text style={styles.subtitle}>Grouped by ingredient from today's quick meal options.</Text>
 
-      {groceryList.map((item) => {
-        const checked = preferences.groceryCheckedIds.includes(item.id);
-        const mealLabel = item.mealCount === 1 ? "meal" : "meals";
-        return (
-          <Pressable key={item.id} onPress={() => onToggleGroceryItem(item.id)}>
-            <Card>
-              <View style={styles.row}>
-                <View style={[styles.check, checked && styles.checked]}>
-                  <Text style={styles.checkText}>{checked ? "x" : ""}</Text>
+        {groceryList.map((item) => {
+          const checked = preferences.groceryCheckedIds.includes(item.id);
+          const mealLabel = item.mealCount === 1 ? "meal" : "meals";
+          return (
+            <Pressable key={item.id} onPress={() => onToggleGroceryItem(item.id)}>
+              <Card>
+                <View style={styles.row}>
+                  <View style={[styles.check, checked && styles.checked]}>
+                    <Text style={styles.checkText}>{checked ? "x" : ""}</Text>
+                  </View>
+                  <View style={styles.copy}>
+                    <Text style={[styles.itemName, checked && styles.itemChecked]}>{item.name}</Text>
+                    <Text style={styles.meta}>Used in {item.mealCount} {mealLabel} today</Text>
+                    <Text style={styles.meals}>{item.mealNames.join(", ")}</Text>
+                  </View>
                 </View>
-                <View style={styles.copy}>
-                  <Text style={[styles.itemName, checked && styles.itemChecked]}>{item.name}</Text>
-                  <Text style={styles.meta}>Used in {item.mealCount} {mealLabel} today</Text>
-                  <Text style={styles.meals}>{item.mealNames.join(", ")}</Text>
-                </View>
-                <Chip label={item.category} tone="blue" />
-              </View>
-            </Card>
-          </Pressable>
-        );
-      })}
-    </ScrollView>
+              </Card>
+            </Pressable>
+          );
+        })}
+      </ScrollView>
+      <AppNav active="GroceryList" navigation={navigation} />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+    backgroundColor: colors.background
+  },
   container: {
     padding: spacing.md,
-    gap: spacing.md
+    gap: spacing.md,
+    paddingBottom: spacing.lg
   },
   title: {
     color: colors.ink,
@@ -104,7 +105,4 @@ const styles = StyleSheet.create({
     lineHeight: 18,
     marginTop: 4
   },
-  nav: {
-    gap: spacing.sm
-  }
 });

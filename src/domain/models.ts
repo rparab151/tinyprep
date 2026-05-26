@@ -56,6 +56,7 @@ export type PersistedAppState = {
 
 export type RootStackParamList = {
   Onboarding: undefined;
+  Intro: undefined;
   WeeklyPlan: undefined;
   Cuisine: undefined;
   MealLibrary: undefined;
