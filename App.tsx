@@ -10,6 +10,7 @@ import { mealsForCuisine } from "./src/data/meals";
 import { buildGroceryList } from "./src/domain/grocery";
 import type { AppPreferences, Cuisine, FoodStatus, MealPlan, RootStackParamList } from "./src/domain/models";
 import { generateWeeklyPlan } from "./src/domain/planning";
+import { CuisineScreen } from "./src/screens/CuisineScreen";
 import { GroceryListScreen } from "./src/screens/GroceryListScreen";
 import { MealDetailScreen } from "./src/screens/MealDetailScreen";
 import { MealLibraryScreen } from "./src/screens/MealLibraryScreen";
@@ -161,6 +162,9 @@ export default function App() {
         </Stack.Screen>
         <Stack.Screen name="WeeklyPlan" options={{ title: "Today" }}>
           {(props) => <WeeklyPlanScreen {...props} {...sharedProps} />}
+        </Stack.Screen>
+        <Stack.Screen name="Cuisine" options={{ title: "Cuisine" }}>
+          {(props) => <CuisineScreen {...props} {...sharedProps} />}
         </Stack.Screen>
         <Stack.Screen name="MealLibrary" options={{ title: "Meal Library" }}>
           {(props) => <MealLibraryScreen {...props} {...sharedProps} />}

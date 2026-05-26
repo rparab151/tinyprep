@@ -36,6 +36,7 @@ export function WeeklyPlanScreen({ navigation, cuisineLabel, weeklyPlan, onShuff
       </View>
 
       <View style={styles.actions}>
+        <Button label="Cuisine" onPress={() => navigation.navigate("Cuisine")} variant="secondary" />
         <Button label="Meals" onPress={() => navigation.navigate("MealLibrary")} variant="secondary" />
         <Button label="Groceries" onPress={() => navigation.navigate("GroceryList")} variant="secondary" />
         <Button label="Cook" onPress={() => navigation.navigate("PrepDay")} variant="secondary" />
