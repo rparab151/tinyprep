@@ -12,7 +12,7 @@ Implemented:
 
 - TypeScript Expo app entrypoint
 - React Navigation native stack
-- Onboarding, Today, Meal Library, Meal Detail, Grocery List, Cook, and Settings / Privacy screens
+- Onboarding, Today, Meal Library, Meal Detail, Grocery List, and Cook screens
 - AsyncStorage persistence for local preferences, favorites, food status labels, grocery checklist state, and plan seed
 - Reusable cards, buttons, chips, list rows, and disclaimer banner
 - Testable meal-selection and grocery-list domain logic

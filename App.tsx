@@ -15,7 +15,6 @@ import { MealDetailScreen } from "./src/screens/MealDetailScreen";
 import { MealLibraryScreen } from "./src/screens/MealLibraryScreen";
 import { OnboardingScreen } from "./src/screens/OnboardingScreen";
 import { PrepDayScreen } from "./src/screens/PrepDayScreen";
-import { SettingsPrivacyScreen } from "./src/screens/SettingsPrivacyScreen";
 import { WeeklyPlanScreen } from "./src/screens/WeeklyPlanScreen";
 import { loadAppState, saveAppState } from "./src/storage/appStorage";
 import { colors } from "./src/theme";
@@ -174,9 +173,6 @@ export default function App() {
         </Stack.Screen>
         <Stack.Screen name="PrepDay" options={{ title: "Cook" }}>
           {(props) => <PrepDayScreen {...props} {...sharedProps} />}
-        </Stack.Screen>
-        <Stack.Screen name="SettingsPrivacy" options={{ title: "Settings & Privacy" }}>
-          {(props) => <SettingsPrivacyScreen {...props} {...sharedProps} />}
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>

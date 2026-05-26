@@ -39,7 +39,6 @@ export function WeeklyPlanScreen({ navigation, cuisineLabel, weeklyPlan, onShuff
         <Button label="Meals" onPress={() => navigation.navigate("MealLibrary")} variant="secondary" />
         <Button label="Groceries" onPress={() => navigation.navigate("GroceryList")} variant="secondary" />
         <Button label="Cook" onPress={() => navigation.navigate("PrepDay")} variant="secondary" />
-        <Button label="Settings" onPress={() => navigation.navigate("SettingsPrivacy")} variant="secondary" />
       </View>
 
       <Card>

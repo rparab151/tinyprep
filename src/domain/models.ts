@@ -63,5 +63,4 @@ export type RootStackParamList = {
   MealDetail: { mealId: string };
   GroceryList: undefined;
   PrepDay: undefined;
-  SettingsPrivacy: undefined;
 };
