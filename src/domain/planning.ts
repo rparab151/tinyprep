@@ -10,7 +10,13 @@ function rotate<T>(items: T[], seed: number): T[] {
 }
 
 function mealsForSlot(meals: Meal[], slot: MealSlot): Meal[] {
-  const direct = meals.filter((meal) => meal.slot === slot);
+  const relatedSlots: Record<MealSlot, MealSlot[]> = {
+    breakfast: ["breakfast", "snack"],
+    lunch: ["lunch", "dinner"],
+    dinner: ["dinner", "lunch"],
+    snack: ["snack", "breakfast"]
+  };
+  const direct = meals.filter((meal) => relatedSlots[slot].includes(meal.slot));
   return direct.length > 0 ? direct : meals;
 }
 

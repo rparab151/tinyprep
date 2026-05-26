@@ -7,6 +7,7 @@ import type { Meal, MealPlan } from "../src/domain/models.ts";
 const baseMeal: Meal = {
   id: "meal-a",
   name: "Meal A",
+  cuisine: "american",
   slot: "breakfast",
   batchYield: "1",
   prepMinutes: 10,

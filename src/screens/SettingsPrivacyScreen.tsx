@@ -4,12 +4,13 @@ import { Button } from "../components/Button";
 import { Card } from "../components/Card";
 import { DisclaimerBanner } from "../components/DisclaimerBanner";
 import { ListRow } from "../components/ListRow";
+import { cuisineLabels, cuisineOptions } from "../data/cuisines";
 import { colors, spacing } from "../theme";
 import type { ScreenProps, SharedScreenProps } from "./types";
 
 type Props = ScreenProps<"SettingsPrivacy"> & SharedScreenProps;
 
-export function SettingsPrivacyScreen({ navigation, preferences }: Props) {
+export function SettingsPrivacyScreen({ navigation, preferences, onSetCuisine }: Props) {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.nav}>
@@ -28,9 +29,24 @@ export function SettingsPrivacyScreen({ navigation, preferences }: Props) {
       </Card>
 
       <Card>
+        <ListRow title="Cuisine" trailing={cuisineLabels[preferences.cuisine]} />
         <ListRow title="Onboarding completed" trailing={preferences.hasCompletedOnboarding ? "Yes" : "No"} />
         <ListRow title="Favorite meals" trailing={`${preferences.favoriteMealIds.length}`} />
         <ListRow title="Prep day" trailing={preferences.prepDay} />
+      </Card>
+
+      <Card>
+        <Text style={styles.sectionTitle}>Change cuisine</Text>
+        <View style={styles.cuisineButtons}>
+          {cuisineOptions.map((option) => (
+            <Button
+              key={option.id}
+              label={option.label}
+              variant={preferences.cuisine === option.id ? "primary" : "secondary"}
+              onPress={() => onSetCuisine(option.id)}
+            />
+          ))}
+        </View>
       </Card>
 
       <DisclaimerBanner />
@@ -54,6 +70,15 @@ const styles = StyleSheet.create({
     lineHeight: 23
   },
   nav: {
+    gap: spacing.sm
+  },
+  sectionTitle: {
+    color: colors.ink,
+    fontSize: 18,
+    fontWeight: "900",
+    marginBottom: spacing.sm
+  },
+  cuisineButtons: {
     gap: spacing.sm
   }
 });

@@ -4,9 +4,11 @@ import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useMemo, useState } from "react";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
 
+import { cuisineLabels } from "./src/data/cuisines";
 import { mealLibrary } from "./src/data/meals";
+import { mealsForCuisine } from "./src/data/meals";
 import { buildGroceryList } from "./src/domain/grocery";
-import type { AppPreferences, FoodStatus, MealPlan, RootStackParamList } from "./src/domain/models";
+import type { AppPreferences, Cuisine, FoodStatus, MealPlan, RootStackParamList } from "./src/domain/models";
 import { generateWeeklyPlan } from "./src/domain/planning";
 import { GroceryListScreen } from "./src/screens/GroceryListScreen";
 import { MealDetailScreen } from "./src/screens/MealDetailScreen";
@@ -22,13 +24,13 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const initialPreferences: AppPreferences = {
   hasCompletedOnboarding: false,
+  cuisine: "indian",
   prepDay: "Sunday",
-  favoriteMealIds: ["banana-oat-pancake-bites", "dal-rice-toddler-cups"],
+  favoriteMealIds: ["indian-moong-dal-khichdi-cups", "indian-paneer-veggie-paratha-bites"],
   foodStatuses: {
-    "banana-oat-pancake-bites": "accepted",
-    "dal-rice-toddler-cups": "accepted",
-    "soft-egg-veggie-muffins": "trying",
-    "salmon-sweet-potato-patties": "retryLater"
+    "indian-moong-dal-khichdi-cups": "accepted",
+    "indian-ragi-banana-dosa-strips": "trying",
+    "indian-paneer-veggie-paratha-bites": "accepted"
   },
   groceryCheckedIds: []
 };
@@ -54,11 +56,27 @@ export default function App() {
     }
   }, [hydrated, preferences, planSeed]);
 
-  const weeklyPlan: MealPlan = useMemo(() => generateWeeklyPlan(mealLibrary, planSeed), [planSeed]);
+  const selectedMeals = useMemo(
+    () => mealsForCuisine(mealLibrary, preferences.cuisine),
+    [preferences.cuisine]
+  );
+  const weeklyPlan: MealPlan = useMemo(() => generateWeeklyPlan(selectedMeals, planSeed), [selectedMeals, planSeed]);
   const groceryList = useMemo(() => buildGroceryList(weeklyPlan), [weeklyPlan]);
 
   function patchPreferences(patch: Partial<AppPreferences>) {
     setPreferences((current) => ({ ...current, ...patch }));
+  }
+
+  function setCuisine(cuisine: Cuisine) {
+    setPreferences((current) => ({
+      ...current,
+      cuisine,
+      favoriteMealIds: current.favoriteMealIds.filter((mealId) =>
+        mealLibrary.some((meal) => meal.id === mealId && meal.cuisine === cuisine)
+      ),
+      groceryCheckedIds: []
+    }));
+    setPlanSeed((seed) => seed + 1);
   }
 
   function toggleFavorite(mealId: string) {
@@ -96,13 +114,15 @@ export default function App() {
   }
 
   const sharedProps = {
-    meals: mealLibrary,
+    meals: selectedMeals,
+    cuisineLabel: cuisineLabels[preferences.cuisine],
     preferences,
     weeklyPlan,
     groceryList,
     onToggleFavorite: toggleFavorite,
     onSetFoodStatus: setFoodStatus,
     onPatchPreferences: patchPreferences,
+    onSetCuisine: setCuisine,
     onShufflePlan: () => setPlanSeed((seed) => seed + 1),
     onToggleGroceryItem: toggleGroceryItem
   };
@@ -131,6 +151,8 @@ export default function App() {
           {(props) => (
             <OnboardingScreen
               {...props}
+              selectedCuisine={preferences.cuisine}
+              onSelectCuisine={setCuisine}
               onComplete={() => patchPreferences({ hasCompletedOnboarding: true })}
             />
           )}

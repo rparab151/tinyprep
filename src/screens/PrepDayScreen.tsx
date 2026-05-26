@@ -11,7 +11,7 @@ type Props = ScreenProps<"PrepDay"> & SharedScreenProps;
 
 const prepDays: PrepDay[] = ["Saturday", "Sunday", "Monday"];
 
-export function PrepDayScreen({ navigation, meals, preferences, onPatchPreferences }: Props) {
+export function PrepDayScreen({ navigation, cuisineLabel, meals, preferences, onPatchPreferences }: Props) {
   const prepMeals = meals.filter((meal) => meal.tags.includes("freezer") || meal.tags.includes("lunchbox"));
 
   return (
@@ -22,7 +22,7 @@ export function PrepDayScreen({ navigation, meals, preferences, onPatchPreferenc
         <Button label="Groceries" onPress={() => navigation.navigate("GroceryList")} variant="secondary" />
       </View>
       <Text style={styles.title}>{preferences.prepDay} prep day</Text>
-      <Text style={styles.subtitle}>Batch cook flexible bases and keep reheating notes close.</Text>
+      <Text style={styles.subtitle}>Batch cook {cuisineLabel.toLowerCase()} toddler meals and keep reheating notes close.</Text>
 
       <View style={styles.dayButtons}>
         {prepDays.map((day) => (

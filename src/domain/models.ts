@@ -1,6 +1,7 @@
 export type MealSlot = "breakfast" | "lunch" | "dinner" | "snack";
 export type FoodStatus = "accepted" | "trying" | "retryLater";
 export type PrepDay = "Saturday" | "Sunday" | "Monday";
+export type Cuisine = "indian" | "mexican" | "japanese" | "chinese" | "american" | "mediterranean";
 
 export type Ingredient = {
   id: string;
@@ -12,6 +13,7 @@ export type Ingredient = {
 export type Meal = {
   id: string;
   name: string;
+  cuisine: Cuisine;
   slot: MealSlot;
   batchYield: string;
   prepMinutes: number;
@@ -42,6 +44,7 @@ export type GroceryItem = {
 
 export type AppPreferences = {
   hasCompletedOnboarding: boolean;
+  cuisine: Cuisine;
   prepDay: PrepDay;
   favoriteMealIds: string[];
   foodStatuses: Record<string, FoodStatus>;

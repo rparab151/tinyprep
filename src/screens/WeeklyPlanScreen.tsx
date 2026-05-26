@@ -9,12 +9,12 @@ import type { ScreenProps, SharedScreenProps } from "./types";
 
 type Props = ScreenProps<"WeeklyPlan"> & SharedScreenProps;
 
-export function WeeklyPlanScreen({ navigation, weeklyPlan, onShufflePlan }: Props) {
+export function WeeklyPlanScreen({ navigation, cuisineLabel, weeklyPlan, onShufflePlan }: Props) {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.header}>
         <View style={styles.headerCopy}>
-          <Text style={styles.kicker}>7-day toddler plan</Text>
+          <Text style={styles.kicker}>{cuisineLabel} toddler plan</Text>
           <Text style={styles.title}>Weekly Plan</Text>
         </View>
         <Button label="Shuffle" onPress={onShufflePlan} variant="secondary" />
@@ -31,7 +31,7 @@ export function WeeklyPlanScreen({ navigation, weeklyPlan, onShufflePlan }: Prop
         <Card key={day.day}>
           <View style={styles.dayHeader}>
             <Text style={styles.day}>{day.day}</Text>
-            <Chip label="balanced rotation" tone="green" />
+            <Chip label={cuisineLabel} tone="green" />
           </View>
           {Object.entries(day.meals).map(([slot, meal]) => (
             <ListRow

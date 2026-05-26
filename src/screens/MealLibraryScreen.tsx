@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { ScrollView, StyleSheet, TextInput, View } from "react-native";
+import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import { Button } from "../components/Button";
 import { Card } from "../components/Card";
 import { Chip } from "../components/Chip";
@@ -9,7 +9,7 @@ import type { ScreenProps, SharedScreenProps } from "./types";
 
 type Props = ScreenProps<"MealLibrary"> & SharedScreenProps;
 
-export function MealLibraryScreen({ navigation, meals, preferences }: Props) {
+export function MealLibraryScreen({ navigation, cuisineLabel, meals, preferences }: Props) {
   const [query, setQuery] = useState("");
 
   const filteredMeals = useMemo(() => {
@@ -37,6 +37,8 @@ export function MealLibraryScreen({ navigation, meals, preferences }: Props) {
         placeholderTextColor={colors.muted}
         style={styles.input}
       />
+
+      <Text style={styles.kicker}>{cuisineLabel} toddler meals</Text>
 
       {filteredMeals.map((meal) => (
         <Card key={meal.id}>
@@ -71,6 +73,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.md,
     color: colors.ink,
     fontSize: 16
+  },
+  kicker: {
+    color: colors.primaryDark,
+    fontSize: 12,
+    fontWeight: "900",
+    textTransform: "uppercase"
   },
   chips: {
     flexDirection: "row",

@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { mealLibrary } from "../src/data/meals.ts";
+import { cuisineOptions } from "../src/data/cuisines.ts";
+import { mealLibrary, mealsForCuisine } from "../src/data/meals.ts";
 import { generateWeeklyPlan } from "../src/domain/planning.ts";
 
 test("generateWeeklyPlan creates seven days with all meal slots", () => {
@@ -13,6 +14,21 @@ test("generateWeeklyPlan creates seven days with all meal slots", () => {
     assert.ok(day.meals.lunch);
     assert.ok(day.meals.dinner);
     assert.ok(day.meals.snack);
+  }
+});
+
+test("each cuisine can generate a full weekly plan using only that cuisine", () => {
+  for (const cuisine of cuisineOptions) {
+    const cuisineMeals = mealsForCuisine(mealLibrary, cuisine.id);
+    const plan = generateWeeklyPlan(cuisineMeals, 1);
+
+    assert.equal(plan.days.length, 7);
+    for (const day of plan.days) {
+      assert.equal(day.meals.breakfast.cuisine, cuisine.id);
+      assert.equal(day.meals.lunch.cuisine, cuisine.id);
+      assert.equal(day.meals.dinner.cuisine, cuisine.id);
+      assert.equal(day.meals.snack.cuisine, cuisine.id);
+    }
   }
 });
 
