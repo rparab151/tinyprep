@@ -487,5 +487,234 @@ export const mealLibrary: Meal[] = [
       { id: "olive-oil", name: "Olive oil", category: "pantry" }
     ],
     servingTip: "Spread hummus thinly on pita strips instead of serving hard dippers."
+  }),
+
+  meal({
+    id: "indian-idli-yogurt-veggie-bowl",
+    cuisine: "indian",
+    name: "Idli Yogurt Veggie Bowl",
+    slot: "breakfast",
+    batchYield: "3 toddler bowls",
+    prepMinutes: 15,
+    freezerNotes: "Best fresh; refrigerate extra idli up to 2 days.",
+    reheatingNotes: "Warm idli with a damp towel, crumble, then stir in yogurt and vegetables.",
+    textureNote: "Soft crumbles with finely chopped vegetables.",
+    tags: ["quick", "vegetarian", "soft"],
+    ingredients: [
+      { id: "idli", name: "Mini idli", category: "bakery" },
+      { id: "yogurt", name: "Plain yogurt", category: "dairy" },
+      { id: "carrot", name: "Carrots", category: "produce" },
+      { id: "peas", name: "Peas", category: "frozen" }
+    ],
+    servingTip: "Keep spices very mild."
+  }),
+  meal({
+    id: "indian-chickpea-rice-skillet",
+    cuisine: "indian",
+    name: "Chickpea Rice Skillet",
+    slot: "dinner",
+    batchYield: "4 toddler bowls",
+    prepMinutes: 20,
+    freezerNotes: "Refrigerate leftovers up to 2 days.",
+    reheatingNotes: "Warm chickpeas, rice, spinach, and water together until soft.",
+    textureNote: "Mash chickpeas lightly and keep rice moist.",
+    tags: ["quick", "vegetarian", "protein"],
+    ingredients: [
+      { id: "chickpeas", name: "Chickpeas", category: "pantry" },
+      { id: "rice", name: "Rice", category: "pantry" },
+      { id: "spinach", name: "Spinach", category: "produce" },
+      { id: "turmeric", name: "Turmeric", category: "pantry" }
+    ],
+    servingTip: "Mash before plating for younger toddlers."
+  }),
+  meal({
+    id: "mexican-zucchini-cheese-quesadilla",
+    cuisine: "mexican",
+    name: "Zucchini Cheese Quesadilla",
+    slot: "lunch",
+    batchYield: "4 small quesadillas",
+    prepMinutes: 15,
+    freezerNotes: "Refrigerate wedges up to 2 days.",
+    reheatingNotes: "Warm tortilla with zucchini and cheese until melted, then soften with avocado if needed.",
+    textureNote: "Soft wedges with no crisp hard edges.",
+    tags: ["quick", "vegetarian", "finger-food"],
+    ingredients: [
+      { id: "flour-tortillas", name: "Flour tortillas", category: "bakery" },
+      { id: "zucchini", name: "Zucchini", category: "produce" },
+      { id: "cheese", name: "Mild cheese", category: "dairy" },
+      { id: "avocado", name: "Avocado", category: "produce" }
+    ],
+    servingTip: "Cut into narrow strips."
+  }),
+  meal({
+    id: "mexican-chicken-corn-rice-soup",
+    cuisine: "mexican",
+    name: "Chicken Corn Rice Soup",
+    slot: "dinner",
+    batchYield: "4 toddler bowls",
+    prepMinutes: 20,
+    freezerNotes: "Refrigerate leftovers up to 2 days.",
+    reheatingNotes: "Simmer chicken, rice, corn, and broth until soft and thick.",
+    textureNote: "Shred chicken finely and keep soup spoonable.",
+    tags: ["quick", "protein", "soft"],
+    ingredients: [
+      { id: "shredded-chicken", name: "Shredded chicken", category: "protein" },
+      { id: "rice", name: "Rice", category: "pantry" },
+      { id: "corn", name: "Corn", category: "frozen" },
+      { id: "low-sodium-broth", name: "Low-sodium broth", category: "pantry" }
+    ],
+    servingTip: "Keep it thick enough to spoon easily."
+  }),
+  meal({
+    id: "japanese-miso-carrot-rice",
+    cuisine: "japanese",
+    name: "Miso Carrot Rice",
+    slot: "breakfast",
+    batchYield: "3 toddler bowls",
+    prepMinutes: 15,
+    freezerNotes: "Refrigerate leftovers up to 2 days.",
+    reheatingNotes: "Warm rice, carrot, tofu, and water together, then stir in a tiny amount of miso off heat.",
+    textureNote: "Soft rice with mashed tofu.",
+    tags: ["quick", "vegetarian", "soft"],
+    ingredients: [
+      { id: "rice", name: "Sushi rice", category: "pantry" },
+      { id: "carrot", name: "Carrots", category: "produce" },
+      { id: "tofu", name: "Firm tofu", category: "protein" },
+      { id: "miso", name: "White miso", category: "pantry" }
+    ],
+    servingTip: "Use very little miso for toddler portions."
+  }),
+  meal({
+    id: "japanese-chicken-soba-bowl",
+    cuisine: "japanese",
+    name: "Chicken Soba Bowl",
+    slot: "dinner",
+    batchYield: "4 toddler bowls",
+    prepMinutes: 20,
+    freezerNotes: "Refrigerate leftovers up to 2 days.",
+    reheatingNotes: "Cook soba, chicken, spinach, and broth until warm, then cut noodles short.",
+    textureNote: "Short soft noodles with finely shredded chicken.",
+    tags: ["quick", "protein", "warm"],
+    ingredients: [
+      { id: "soba", name: "Soba noodles", category: "pantry" },
+      { id: "shredded-chicken", name: "Shredded chicken", category: "protein" },
+      { id: "spinach", name: "Spinach", category: "produce" },
+      { id: "low-sodium-broth", name: "Low-sodium broth", category: "pantry" }
+    ],
+    servingTip: "Cut noodles before plating."
+  }),
+  meal({
+    id: "chinese-tomato-egg-noodles",
+    cuisine: "chinese",
+    name: "Tomato Egg Noodles",
+    slot: "lunch",
+    batchYield: "4 toddler bowls",
+    prepMinutes: 18,
+    freezerNotes: "Refrigerate leftovers up to 2 days.",
+    reheatingNotes: "Cook egg, tomato, noodles, and broth until saucy and soft.",
+    textureNote: "Short noodles with soft egg curds.",
+    tags: ["quick", "protein", "soft"],
+    ingredients: [
+      { id: "egg", name: "Eggs", category: "protein" },
+      { id: "tomatoes", name: "Tomatoes", category: "produce" },
+      { id: "noodles", name: "Soft noodles", category: "pantry" },
+      { id: "low-sodium-broth", name: "Low-sodium broth", category: "pantry" }
+    ],
+    servingTip: "Keep noodles short."
+  }),
+  meal({
+    id: "chinese-tofu-broccoli-rice",
+    cuisine: "chinese",
+    name: "Tofu Broccoli Rice",
+    slot: "dinner",
+    batchYield: "4 toddler bowls",
+    prepMinutes: 20,
+    freezerNotes: "Refrigerate leftovers up to 2 days.",
+    reheatingNotes: "Steam broccoli, warm tofu and rice, then mash together with broth.",
+    textureNote: "Very soft broccoli florets and small tofu cubes.",
+    tags: ["quick", "vegetarian", "soft"],
+    ingredients: [
+      { id: "tofu", name: "Firm tofu", category: "protein" },
+      { id: "broccoli", name: "Broccoli", category: "produce" },
+      { id: "rice", name: "Rice", category: "pantry" },
+      { id: "sesame-oil", name: "Sesame oil", category: "pantry" }
+    ],
+    servingTip: "Mash broccoli stems well."
+  }),
+  meal({
+    id: "american-creamy-pasta-peas",
+    cuisine: "american",
+    name: "Creamy Pasta Peas",
+    slot: "lunch",
+    batchYield: "4 toddler bowls",
+    prepMinutes: 18,
+    freezerNotes: "Refrigerate leftovers up to 2 days.",
+    reheatingNotes: "Cook pasta and peas, then stir with milk and cheese until creamy.",
+    textureNote: "Small pasta shapes with soft peas.",
+    tags: ["quick", "vegetarian", "soft"],
+    ingredients: [
+      { id: "small-pasta", name: "Small pasta", category: "pantry" },
+      { id: "peas", name: "Peas", category: "frozen" },
+      { id: "milk", name: "Milk", category: "dairy" },
+      { id: "shredded-cheese", name: "Shredded cheese", category: "dairy" }
+    ],
+    servingTip: "Use extra milk to loosen."
+  }),
+  meal({
+    id: "american-salmon-potato-cakes",
+    cuisine: "american",
+    name: "Salmon Potato Cakes",
+    slot: "dinner",
+    batchYield: "8 small cakes",
+    prepMinutes: 20,
+    freezerNotes: "Refrigerate leftovers up to 2 days.",
+    reheatingNotes: "Mash salmon, potato, egg, and breadcrumbs, then pan-warm into soft cakes.",
+    textureNote: "Soft cakes; check salmon carefully for bones.",
+    tags: ["quick", "protein", "finger-food"],
+    ingredients: [
+      { id: "salmon", name: "Salmon", category: "protein" },
+      { id: "potato", name: "Potatoes", category: "produce" },
+      { id: "egg", name: "Eggs", category: "protein" },
+      { id: "breadcrumbs", name: "Breadcrumbs", category: "pantry" }
+    ],
+    servingTip: "Break apart before plating."
+  }),
+  meal({
+    id: "mediterranean-turkey-spinach-orzo",
+    cuisine: "mediterranean",
+    name: "Turkey Spinach Orzo",
+    slot: "lunch",
+    batchYield: "4 toddler bowls",
+    prepMinutes: 20,
+    freezerNotes: "Refrigerate leftovers up to 2 days.",
+    reheatingNotes: "Cook turkey, orzo, spinach, and broth until tender and moist.",
+    textureNote: "Tiny pasta with finely crumbled turkey.",
+    tags: ["quick", "protein", "soft"],
+    ingredients: [
+      { id: "ground-turkey", name: "Ground turkey", category: "protein" },
+      { id: "orzo", name: "Orzo", category: "pantry" },
+      { id: "spinach", name: "Spinach", category: "produce" },
+      { id: "low-sodium-broth", name: "Low-sodium broth", category: "pantry" }
+    ],
+    servingTip: "Keep it loose with extra broth."
+  }),
+  meal({
+    id: "mediterranean-white-bean-toast",
+    cuisine: "mediterranean",
+    name: "White Bean Soft Toast",
+    slot: "snack",
+    batchYield: "4 snack plates",
+    prepMinutes: 15,
+    freezerNotes: "Best fresh; refrigerate bean mash up to 2 days.",
+    reheatingNotes: "Mash beans with yogurt and olive oil, then spread on soft toast strips.",
+    textureNote: "Smooth bean spread on soft bread.",
+    tags: ["quick", "vegetarian", "snack"],
+    ingredients: [
+      { id: "white-beans", name: "White beans", category: "pantry" },
+      { id: "yogurt", name: "Plain yogurt", category: "dairy" },
+      { id: "soft-bread", name: "Soft bread", category: "bakery" },
+      { id: "olive-oil", name: "Olive oil", category: "pantry" }
+    ],
+    servingTip: "Toast lightly so it stays soft."
   })
 ];

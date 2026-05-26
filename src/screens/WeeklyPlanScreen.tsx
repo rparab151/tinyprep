@@ -30,16 +30,16 @@ export function WeeklyPlanScreen({ navigation, cuisineLabel, weeklyPlan, onShuff
       <View style={styles.header}>
         <View style={styles.headerCopy}>
           <Text style={styles.kicker}>{cuisineLabel} | 15-20 minute toddler meals</Text>
-          <Text style={styles.title}>Today's meals</Text>
+          <Text style={styles.title}>What can I cook today?</Text>
         </View>
         <Button label="Refresh" onPress={onShufflePlan} variant="secondary" />
       </View>
 
       <View style={styles.actions}>
-        <Button label="Cuisine" onPress={() => navigation.navigate("Cuisine")} variant="secondary" />
-        <Button label="Meals" onPress={() => navigation.navigate("MealLibrary")} variant="secondary" />
-        <Button label="Groceries" onPress={() => navigation.navigate("GroceryList")} variant="secondary" />
-        <Button label="Cook" onPress={() => navigation.navigate("PrepDay")} variant="secondary" />
+        <Button label="Cuisine" onPress={() => navigation.navigate("Cuisine")} variant="secondary" style={styles.actionButton} />
+        <Button label="Meals" onPress={() => navigation.navigate("MealLibrary")} variant="secondary" style={styles.actionButton} />
+        <Button label="Groceries" onPress={() => navigation.navigate("GroceryList")} variant="secondary" style={styles.actionButton} />
+        <Button label="Cook" onPress={() => navigation.navigate("PrepDay")} variant="secondary" style={styles.actionButton} />
       </View>
 
       <Card>
@@ -59,13 +59,6 @@ export function WeeklyPlanScreen({ navigation, cuisineLabel, weeklyPlan, onShuff
             onPress={() => navigation.navigate("MealDetail", { mealId: meal.id })}
           />
         ))}
-      </Card>
-
-      <Card>
-        <Text style={styles.sectionTitle}>Daily rhythm</Text>
-        <ListRow title="Breakfast" subtitle="Soft start with a familiar texture and one fruit or yogurt side." />
-        <ListRow title="Lunch or dinner" subtitle="Use the same base ingredient twice to keep cooking simple." />
-        <ListRow title="Snack" subtitle="Offer a small protein, a soft carb, and water." />
       </Card>
     </ScrollView>
   );
@@ -92,11 +85,18 @@ const styles = StyleSheet.create({
   },
   title: {
     color: colors.ink,
-    fontSize: 30,
-    fontWeight: "900"
+    fontSize: 34,
+    fontWeight: "900",
+    lineHeight: 39
   },
   actions: {
+    flexDirection: "row",
+    flexWrap: "wrap",
     gap: spacing.sm
+  },
+  actionButton: {
+    flexBasis: "48%",
+    flexGrow: 1
   },
   dayHeader: {
     flexDirection: "row",

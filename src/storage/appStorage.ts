@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import type { PersistedAppState } from "../domain/models";
 
-const storageKey = "tinyprep.app-state.v1";
+const storageKey = "tinyprep.app-state.v2";
 
 export async function loadAppState(): Promise<PersistedAppState | null> {
   try {

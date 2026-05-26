@@ -23,6 +23,7 @@ export type Meal = {
   tags: string[];
   ingredients: Ingredient[];
   servingTip: string;
+  recipeSteps?: string[];
 };
 
 export type PlannedDay = {

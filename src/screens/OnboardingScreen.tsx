@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { Button } from "../components/Button";
 import { Card } from "../components/Card";
@@ -15,9 +15,37 @@ type Props = ScreenProps<"Onboarding"> & {
 };
 
 export function OnboardingScreen({ navigation, selectedCuisine, onSelectCuisine, onComplete }: Props) {
+  const [step, setStep] = useState<"intro" | "cuisine">("intro");
+
   function start() {
     onComplete();
     navigation.replace("WeeklyPlan");
+  }
+
+  if (step === "intro") {
+    return (
+      <ScrollView contentContainerStyle={styles.container}>
+        <View style={styles.hero}>
+          <Text style={styles.kicker}>TinyPrep</Text>
+          <Text style={styles.title}>Tonight's toddler meal, without the planning spiral.</Text>
+          <Text style={styles.body}>
+            Pick a cuisine and get fast, healthy toddler meals with ingredients, cooking steps,
+            groceries, and texture notes built for a 15-20 minute kitchen window.
+          </Text>
+        </View>
+
+        <View style={styles.featureGrid}>
+          {["Cuisine-led ideas", "15-20 minute cooking", "Ingredients + steps", "Toddler texture notes"].map((text) => (
+            <Card key={text}>
+              <Text style={styles.cardText}>{text}</Text>
+            </Card>
+          ))}
+        </View>
+
+        <DisclaimerBanner />
+        <Button label="Choose cuisine" onPress={() => setStep("cuisine")} />
+      </ScrollView>
+    );
   }
 
   return (
@@ -63,6 +91,10 @@ const styles = StyleSheet.create({
     padding: spacing.lg,
     gap: spacing.md
   },
+  hero: {
+    gap: spacing.sm,
+    paddingVertical: spacing.lg
+  },
   kicker: {
     color: colors.primaryDark,
     fontSize: 13,
@@ -81,6 +113,11 @@ const styles = StyleSheet.create({
     lineHeight: 25
   },
   stack: {
+    gap: spacing.sm
+  },
+  featureGrid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
     gap: spacing.sm
   },
   sectionTitle: {

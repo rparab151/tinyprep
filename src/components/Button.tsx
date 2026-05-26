@@ -1,19 +1,20 @@
 import React from "react";
-import { Pressable, StyleSheet, Text } from "react-native";
+import { Pressable, StyleProp, StyleSheet, Text, ViewStyle } from "react-native";
 import { colors, spacing } from "../theme";
 
 type ButtonProps = {
   label: string;
   onPress: () => void;
   variant?: "primary" | "secondary" | "quiet";
+  style?: StyleProp<ViewStyle>;
 };
 
-export function Button({ label, onPress, variant = "primary" }: ButtonProps) {
+export function Button({ label, onPress, variant = "primary", style }: ButtonProps) {
   return (
     <Pressable
       accessibilityRole="button"
       onPress={onPress}
-      style={({ pressed }) => [styles.button, styles[variant], pressed && styles.pressed]}
+      style={({ pressed }) => [styles.button, styles[variant], style, pressed && styles.pressed]}
     >
       <Text style={[styles.label, variant === "primary" ? styles.primaryLabel : styles.secondaryLabel]}>
         {label}

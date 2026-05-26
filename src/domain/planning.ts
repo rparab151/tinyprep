@@ -27,12 +27,14 @@ export function generateWeeklyPlan(meals: Meal[], seed = 0): MealPlan {
 
   return {
     days: weekDays.map((day, dayIndex) => {
+      const usedMealIds = new Set<string>();
       const dayMeals = slots.reduce<Record<MealSlot, Meal>>((acc, slot, slotIndex) => {
         const pool = rotate(mealsForSlot(meals, slot), seed + dayIndex + slotIndex);
-        const selected = pool[0];
+        const selected = pool.find((meal) => !usedMealIds.has(meal.id)) ?? pool[0];
         if (!selected) {
           throw new Error(`No meal available for ${slot}`);
         }
+        usedMealIds.add(selected.id);
         acc[slot] = selected;
         return acc;
       }, {} as Record<MealSlot, Meal>);

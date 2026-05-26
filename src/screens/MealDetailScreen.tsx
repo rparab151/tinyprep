@@ -64,7 +64,6 @@ export function MealDetailScreen({ route, meals, preferences, onToggleFavorite, 
         <Text style={styles.sectionTitle}>Notes</Text>
         <ListRow title="Cook" subtitle={meal.reheatingNotes} />
         <ListRow title="Texture" subtitle={meal.textureNote} />
-        <ListRow title="Serving tip" subtitle={meal.servingTip} />
         <ListRow title="Leftovers" subtitle={meal.freezerNotes} />
       </Card>
 

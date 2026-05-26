@@ -52,3 +52,24 @@ test("meal library only includes 15-20 minute options", () => {
     assert.ok(meal.prepMinutes <= 20, `${meal.name} is over 20 minutes`);
   }
 });
+
+test("each cuisine has at least six meal options", () => {
+  for (const cuisine of cuisineOptions) {
+    assert.ok(
+      mealsForCuisine(mealLibrary, cuisine.id).length >= 6,
+      `${cuisine.label} needs more meal options`
+    );
+  }
+});
+
+test("generated day avoids duplicate meals when enough options exist", () => {
+  const plan = generateWeeklyPlan(mealsForCuisine(mealLibrary, "indian"), 1);
+  const firstDay = plan.days[0];
+
+  if (!firstDay) {
+    throw new Error("Expected generated plans to include a first day");
+  }
+
+  const mealIds = Object.values(firstDay.meals).map((meal) => meal.id);
+  assert.equal(new Set(mealIds).size, mealIds.length);
+});
